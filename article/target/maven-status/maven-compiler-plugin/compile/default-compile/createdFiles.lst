@@ -1,0 +1,14 @@
+com\eustache\article\model\Article$ArticleBuilder.class
+com\eustache\article\model\ArticleCategory.class
+com\eustache\article\model\Response.class
+com\eustache\article\service\ArticleServiceImpl.class
+com\eustache\article\model\Response$ResponseBuilderImpl.class
+com\eustache\article\repository\ArticleRepositoryImpl.class
+com\eustache\article\model\QArticle.class
+com\eustache\article\repository\ArticleRepository.class
+com\eustache\article\service\ArticleService.class
+com\eustache\article\exceptions\ArticleNotFoundException.class
+com\eustache\article\model\Article.class
+com\eustache\article\model\Response$ResponseBuilder.class
+com\eustache\article\ArticleApplication.class
+com\eustache\article\controller\ArticleController.class
