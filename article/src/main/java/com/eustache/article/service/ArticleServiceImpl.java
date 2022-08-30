@@ -4,7 +4,9 @@ import com.eustache.article.model.Article;
 import com.eustache.article.model.ArticleCategory;
 import com.eustache.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -17,6 +19,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleRepository articleRepository;
 
+    @Autowired
+    private RestTemplate restTemplate;
     @Override
     public List<Article> findAll() {
         return articleRepository.findAll();
@@ -36,8 +40,9 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    public Article saveArticle(Article articleToSave) {
-        return articleRepository.save(articleToSave);
+    public Article saveArticle(Article article) {
+        articleRepository.saveAndFlush(article);
+        return article;
     }
 
     @Override

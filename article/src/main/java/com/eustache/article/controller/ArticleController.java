@@ -6,11 +6,14 @@ import com.eustache.article.model.Article;
 import com.eustache.article.model.ArticleCategory;
 import com.eustache.article.service.ArticleService;
 import com.eustache.model.Response;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -25,6 +28,9 @@ import java.util.Optional;
 public class ArticleController {
 
     public static final String ARTICLE = "article";
+    @Autowired
+    ObjectMapper objectMapper;
+
     @Autowired
     ArticleService articleService;
     @GetMapping("/listArticles")
@@ -70,16 +76,17 @@ public class ArticleController {
         );
     }
     @PostMapping("/saveArticle")
-    public ResponseEntity<Response> saveArticle(@RequestBody Article articleToSave){
+    public ResponseEntity<Response> saveArticle(@RequestBody Article article) {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/saveArticle")
-                .buildAndExpand(articleToSave.getName())
+                .buildAndExpand(article.getName())
                 .toUri();
+
         return ResponseEntity.created(location).body(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of(ARTICLE, articleService.saveArticle(articleToSave)))
+                        .data(Map.of(ARTICLE, articleService.saveArticle(article)))
                         .message("Article saved")
                         .status(HttpStatus.CREATED)
                         .statusCode(HttpStatus.CREATED.value()).build()

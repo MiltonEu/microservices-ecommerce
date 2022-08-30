@@ -21,7 +21,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
+
+    private final UserService userService;
 
     @GetMapping("/listUsers")
     public ResponseEntity<Response> findAllUsers(){
@@ -51,7 +52,7 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    public ResponseEntity<Response> saveAdmin(@RequestBody Admin adminToSave){
+    public ResponseEntity<Response> saveAdmin(@RequestBody User userToSave){
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/saveUser")
@@ -60,7 +61,7 @@ public class UserController {
         return ResponseEntity.created(location).body(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("admin", userService.saveUser(adminToSave)))
+                        .data(Map.of("admin", userService.saveUser(userToSave)))
                         .message("Admin saved")
                         .status(HttpStatus.CREATED)
                         .statusCode(HttpStatus.CREATED.value()).build()

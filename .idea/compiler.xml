@@ -8,8 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="basket" />
+        <module name="image" />
         <module name="credit_card" />
         <module name="error-handlers" />
+        <module name="webclient" />
         <module name="response-model" />
         <module name="user" />
         <module name="eureka-server" />
@@ -20,6 +22,7 @@
     <bytecodeTargetLevel target="17">
       <module name="auth-service" target="15" />
       <module name="entity-response-model" target="15" />
+      <module name="webclient" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>
